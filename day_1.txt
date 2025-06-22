@@ -1,0 +1,44 @@
+✅ Step-by-Step: Generate SSH Key and Connect Mac to GitHub (No Password)
+🔐 Step 1: Generate a New SSH Key Pair
+ssh-keygen -t ed25519 -C "your_email@example.com" # Replace your_email@example.com with the email you use for your GitHub account.
+Press Enter to accept the default file location (/Users/amitk30/.ssh/id_ed25519)
+📋 Step 2: Add Your SSH Key to GitHub
+1. Copy your public key:
+cat ~/.ssh/id_ed25519.pub
+2. Add it to GitHub:
+Log in to https://github.com
+
+Go to your Profile photo > Settings
+
+In the left sidebar, click "SSH and GPG keys"
+
+Click the green "New SSH key"
+
+Paste the key into the Key field
+
+Give it a title like "MacBook SSH" and click Add SSH Key
+
+🔄 Step 3: Add SSH Key to Your SSH Agent
+Start the SSH agent:
+eval "$(ssh-agent -s)"
+
+✅ Command 1: eval "$(ssh-agent -s)"
+🔍 What it does:
+This starts the SSH agent in the background and sets environment variables your shell needs to communicate with it.
+
+🧠 Think of SSH agent like:
+A temporary memory locker that holds your private keys while your terminal session is active, so you don’t have to enter passwords each time you use the key.
+
+✅ Command 2: ssh-add ~/.ssh/id_ed25519
+🔍 What it does:
+This command adds your SSH private key (id_ed25519) to the SSH agent that you started with the previous command.
+
+So now, when GitHub asks for authentication, the SSH agent provides the key automatically.
+
+📌 If you skip this step, GitHub may still ask for your passphrase or reject your connection because the SSH agent isn’t holding your key.
+
+
+🔌 Step 4: Test Your Connection
+
+ssh -T git@github.com
+
