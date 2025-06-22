@@ -42,3 +42,6 @@ So now, when GitHub asks for authentication, the SSH agent provides the key auto
 
 ssh -T git@github.com
 
+✅ 2. Change it to SSH
+Run this to switch the remote to SSH:
+git remote set-url origin git@github.com:username/repo.git
